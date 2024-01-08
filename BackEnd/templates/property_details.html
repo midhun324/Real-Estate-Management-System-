@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Striped Table</h4>
+                  <p class="card-description">
+                    Add class <code>.table-striped</code>
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>
+                            Image
+                          </th>
+                          <th>
+                            Property Name
+                          </th>
+                          <th>
+                            Tenant Name
+
+                          </th>
+                          <th>
+                            Description
+                          </th>
+                          <th>
+                            Address
+                          </th>
+                            <th>
+                            Location
+                          </th>
+                          <th>
+                           Price
+                          </th>
+                          <th>
+                            Area
+                          </th>
+                          <th>
+                            Parking
+                          </th>
+                          <th>
+                            Garage
+                          </th>
+                          <th>
+                            PropertyStatus
+                          </th>
+                           <th>
+                            Property Type
+                          </th>
+                          <th>
+                            BedRooms
+                          </th>
+                          <th>
+                            Bathrooms
+                          </th>
+                          <th>
+                            EDIT
+                          </th>
+                          <th>
+                            DELETE
+                          </th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for i in data %}
+
+                        <tr>
+                          <td class="py-1">
+                            <img src="{{i.Image.url}}" alt="image" style="width:40px;height:40px;">
+                          </td>
+                          <td>
+                            {{i.PropertyName}}
+                          </td>
+                          <td>
+                          {{i.TenantName}}
+                          </td>
+                          <td>
+                            {{i.Description}}
+                          </td>
+                          <td>
+                             {{i.Address}}
+                          </td>
+                          <td>
+                             {{i.Location}}
+                          </td>
+                          <td>
+                             {{i.Price}}
+                          </td>
+                          <td>
+                             {{i.Size}}
+                          </td>
+                          <td>
+                             {{i.Parking}}
+                          </td>
+                          <td>
+                             {{i.Garage}}
+                          </td>
+                          <td>
+                             {{i.PropertyStatus}}
+                          </td>
+                          <td>
+                             {{i.PropertyType}}
+                          </td>
+                          <td>
+                             {{i.BedRooms}}
+                          </td>
+                          <td>
+                             {{i.Bathrooms}}
+                          </td>
+                          <td>
+                            <form action="{% url 'editproperty_page' dataid=i.id %}" method="post">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-primary">EDIT</button>
+                            </form>
+                          </td>
+                          <td>
+                            <form action="{% url 'delete_prop' dataid=i.id %}" method="post">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-danger btn-rounded btn-fw">DELETE</button>
+
+                            </form>
+                          </td>
+
+
+                        </tr>
+
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+</body>
+{% endblock %}
+</html>

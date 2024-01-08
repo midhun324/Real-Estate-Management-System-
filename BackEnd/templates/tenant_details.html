@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h2 class="card-title">Tenant Details</h2>
+
+                  <div class="table-responsive pt-3">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>
+                            Tenant Name
+                          </th>
+                          <th>
+                            Email
+                          </th>
+                          <th>
+                            Phone
+                          </th>
+                          <th>
+                            Document Proof
+                          </th>
+                           <th>
+                            Address
+                          </th>
+                           <th>
+                           Tenant Image
+                          </th>
+                           <th>
+                           EDIT
+                          </th>
+                           <th>
+                           DELETE
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for i in data %}
+                        <tr>
+
+                          <td>
+                            {{i.Tenant}}
+                          </td>
+                          <td>
+                         {{i.Email}}
+                          </td>
+                          <td>
+                              {{i.Phone}}
+                          </td>
+                          <td>
+                              <img src="{{i.Document_Proofs.url}}" alt="" style="width:60px;height:60px;">
+                          </td>
+                          <td>
+                              {{i.address}}
+
+                          </td>
+
+                            <td>
+                                <img src="{{i.ImageTenant.url}}" alt="">
+
+                          </td>
+                            <td>
+                                <form action="{% url 'edit_tenant' dataid=i.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit">EDIT</button>
+                                </form>
+
+                          </td>
+
+                            <td>
+                                <form action="{% url 'delete_tenants' dataid=i.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit">DELETE</button>
+                                </form>
+
+                          </td>
+
+
+                        </tr>
+                      {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+</body>
+{% endblock %}
+</html>
